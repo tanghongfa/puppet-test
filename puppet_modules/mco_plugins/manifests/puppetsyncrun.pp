@@ -11,16 +11,16 @@ class mco_plugins::puppetsyncrun {
   #  mode  => $pe_mcollective::params::root_mode,
   #}
 
-  Class['puppet_enterprise::mcollective::server::plugins'] -> Class[$title] ~> Service['pe-mcollective']
-  include puppet_enterprise
+  #Class['puppet_enterprise::mcollective::server::plugins'] -> Class[$title] ~> Service['pe-mcollective']
+  include puppet_enterprise::params
   $plugin_basedir = $puppet_enterprise::params::mco_plugin_basedir
   $mco_etc        = $puppet_enterprise::params::mco_etc
 
-  File {
-    owner => $puppet_enterprise::params::root_owner,
-    group => $puppet_enterprise::params::root_group,
-    mode  => $puppet_enterprise::params::root_mode,
-  }
+  #File {
+  #  owner => $puppet_enterprise::params::root_owner,
+  #  group => $puppet_enterprise::params::root_group,
+  #  mode  => $puppet_enterprise::params::root_mode,
+  #}
 
   file {"${plugin_basedir}/agent/puppetsyncrun.ddl":
     ensure => file,
