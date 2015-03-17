@@ -11,9 +11,9 @@ class mco_plugins::puppetsyncrun {
   #  mode  => $pe_mcollective::params::root_mode,
   #}
 
-  Class['puppet_enterprise::server::plugins'] -> Class[$title] ~> Service['pe-mcollective']
+  Class['puppet_enterprise::mcollective::server::plugins'] -> Class[$title] ~> Service['pe-mcollective']
   include puppet_enterprise
-  $plugin_basedir = $puppet_enterprise::server::plugins::plugin_basedir
+  $plugin_basedir = $puppet_enterprise::params::mco_plugin_basedir
   $mco_etc        = $puppet_enterprise::params::mco_etc
 
   File {
