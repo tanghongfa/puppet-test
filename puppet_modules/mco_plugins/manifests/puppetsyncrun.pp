@@ -1,5 +1,5 @@
 # /etc/puppetlabs/puppet/modules/mco_plugins/manifests/puppetsyncrun.pp
-class mco_plugins::nrpe {
+class mco_plugins::puppetsyncrun {
   Class['pe_mcollective::server::plugins'] -> Class[$title] ~> Service['pe-mcollective']
   include pe_mcollective
   $plugin_basedir = $pe_mcollective::server::plugins::plugin_basedir
