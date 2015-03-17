@@ -1,6 +1,6 @@
 # $libdir/mcollective/agent/echo.ddl
 metadata :name        => 'puppetsyncrun',
-         :description => 'Plugin to Run puppet with command "puppet agent -t',
+         :description => 'The plugin to Run puppet with command "puppet agent -t"',
          :author      => 'HongFa Tang',
          :license     => 'GPLv2',
          :version     => '0.1',

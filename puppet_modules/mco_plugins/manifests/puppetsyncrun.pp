@@ -25,11 +25,13 @@ class mco_plugins::puppetsyncrun {
   file {"${plugin_basedir}/agent/puppetsyncrun.ddl":
     ensure => file,
     source => 'puppet:///modules/mco_plugins/mcollective-puppetsyncrun-agent/agent/puppetsyncrun.ddl',
+    notify => Service['pe-mcollective'],
   }
 
   file {"${plugin_basedir}/agent/puppetsyncrun.rb":
     ensure => file,
     source => 'puppet:///modules/mco_plugins/mcollective-puppetsyncrun-agent/agent/puppetsyncrun.rb',
+    notify => Service['pe-mcollective'],
   }
-  
+ 
 }
