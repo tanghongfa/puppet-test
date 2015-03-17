@@ -2,7 +2,7 @@
 module MCollective
   module Agent
     class Echo<RPC::Agent
-      action "run" do
+      action "echo" do
         #reply[:msg] = request[:msg]
         reply[:statuscode] = run("/opt/puppet/bin/puppet agent -t", :stdout => :out, :stderr => :err)
         exitcode = reply[:statuscode]
