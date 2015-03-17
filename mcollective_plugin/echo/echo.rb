@@ -4,7 +4,7 @@ module MCollective
     class Echo<RPC::Agent
       action "echo" do
         #reply[:msg] = request[:msg]
-        reply[:statuscode] = run("ls -al", :stdout => :out, :stderr => :err)
+        reply[:statuscode] = run("puppet agent -t", :stdout => :out, :stderr => :err)
       end
     end
   end

@@ -1,13 +1,13 @@
 # $libdir/mcollective/agent/echo.ddl
 metadata :name        => 'echo',
-         :description => 'Echo service for MCollective',
-         :author      => 'R.I.Pienaar',
+         :description => 'Plugin to Run puppet with command "puppet agent -t',
+         :author      => 'HongFa Tang',
          :license     => 'GPLv2',
-         :version     => '1.1',
+         :version     => '0.1',
          :url         => 'https://docs.puppetlabs.com/mcollective/simplerpc/agents.html',
          :timeout     => 60
 
-action 'echo', :description => 'Echos back any message it receives' do
+action 'echo', :description => 'Run "puppet agent -t" command and return back the output"' do
     display :always
 
     input :msg,
