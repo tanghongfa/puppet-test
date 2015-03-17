@@ -37,6 +37,8 @@
 #
 class runpatch {
 
+    notify {"this is in the linked runpath module":}
+
     $lock_file = '/var/tmp/runpatch.lock'
 
     exec { "apply_patch":
