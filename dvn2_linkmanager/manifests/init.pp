@@ -62,7 +62,7 @@ class dvn2_linkmanager {
         provider => 'rpm',
         name => $package_name, 
         ensure => $Dimetis,
-        install_options => [ '—oldpackage’],
+        install_options => [ '—oldpackage'],
         source => $package_url,
         notify => Exec['Apply Dimetis Patch'], #If there is an installation happenned, just notify the patch script to apply the patch
     }
