@@ -40,7 +40,7 @@ class dvn2_linkmanager {
     $Dimetis = 'p15.05'
     $linkmanager_service_name = 'linkmanager' #TODO: move to parameter file could be better in case it is required by other modules, so we don't hardcode everywhere
     $package_name = 'dimitis-linkmanager'     #TODO: move to parameter file could be better in case it is required by other modules, so we don't hardcode everywhere
-    $package_url = "http://10.208.78.39:5080/content/repositories/dvn2-dev2-releases/dvn2/dimitis/dimitis-linkmanager/${Dimetis}-1/""
+    $package_url = "http://10.208.78.39:5080/content/repositories/dvn2-dev2-releases/dvn2/dimitis/dimitis-linkmanager/${Dimetis}-1/"
     $patch_cmd = '/opt/linkmanager/dest/patches/apply_patch.sh'
     $patch_lock_file = '/var/tmp/runpatch.lock'
 
@@ -56,7 +56,7 @@ class dvn2_linkmanager {
     #
     # Ensure the specific verison of linkmanager package is installed.
     #
-    package { 'DVN2 Linkmanager':,
+    package { 'DVN2 Linkmanager':
         provider => 'rpm',
         name => $package_name, 
         ensure => $Dimetis,
@@ -69,7 +69,7 @@ class dvn2_linkmanager {
     # This command will be executed if linkmanger package is updated
     #
     exec { 'Apply Dimetis Patch':
-        command   => "${patch_cmd}",
+        command   => $patch_cmd,
         path      => "/bin:/usr/bin:/usr/local/bin/",
         logoutput => true,
         creates   => $patch_lock_file,
