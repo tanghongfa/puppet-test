@@ -86,4 +86,8 @@ class dvn2_linkmanager {
         ensure => file,
     }
 
+    service { $linkmanager_service_name:
+        ensure => running,
+    }
+
 }
