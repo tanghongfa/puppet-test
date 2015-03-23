@@ -38,10 +38,10 @@
 class dvn2_linkmanager {
 
     $Dimetis = 'p15.05'
-    $linkmanager_service_name = 'linkmanager' #TODO: move to parameter file could be better in case it is required by other modules, so we don't hardcode everywhere
+    $linkmanager_service_name = 'httpd' #'linkmanager' #TODO: move to parameter file could be better in case it is required by other modules, so we don't hardcode everywhere
     $package_name = 'dimitis-linkmanager'     #TODO: move to parameter file could be better in case it is required by other modules, so we don't hardcode everywhere
     $package_url = "http://10.208.78.39:5080/content/repositories/dvn2-dev2-releases/dvn2/dimitis/dimitis-linkmanager/${Dimetis}-1/""
-    $patch_cmd = '/opt/linkmanager/dest/patches/apply_patch.sh'
+    $patch_cmd = '/var/tmp/apply_patch.sh' #'/opt/linkmanager/dest/patches/apply_patch.sh'
     $patch_lock_file = '/var/tmp/runpatch.lock'
 
     #
@@ -50,19 +50,29 @@ class dvn2_linkmanager {
     transition { 'Stop LinkManager Service':
         resource   => Service[$linkmanager_service_name],
         attributes => { ensure => stopped },
-        prior_to   => Package['DVN2 Linkmanager'],
+        #prior_to   => Package['DVN2 Linkmanager'],
+        prior_to => Exec['Install DVN2 Linkmanager'],
     }
     
     #
     # Ensure the specific verison of linkmanager package is installed.
     #
-    package { 'DVN2 Linkmanager':,
-        provider => 'rpm',
-        name => $package_name, 
-        ensure => $Dimetis,
-        install_options => [ '—oldpackage'],
-        source => $package_url,
-        notify => Exec['Apply Dimetis Patch'], #If there is an installation happenned, just notify the patch script to apply the patch
+#    package { 'DVN2 Linkmanager':,
+#        provider => 'rpm',
+#        name => $package_name, 
+#        ensure => $Dimetis,
+#        install_options => [ '—oldpackage'],
+#        source => $package_url,
+#        notify => Exec['Apply Dimetis Patch'], #If there is an installation happenned, just notify the patch script to apply the patch
+#    }
+
+    $instalCmd = "rpm -Uvh --oldpackage http://192.168.119.1/dimitis-linkmanager-${Dimetis}-1.rpm"
+
+    exec { "Install DVN2 Linkmanager":
+        command => $instalCmd,
+        path => "/bin:/usr/bin:/usr/local/bin/",
+        logoutput => true,
+        onlyif => ["test `rpm -qa ${package_name}` == 'dimitis-linkmanager-p16.05-1.noarch'"]
     }
 
     #
