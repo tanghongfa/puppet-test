@@ -60,7 +60,7 @@ class dvn2_linkmanager {
         command => $package_install_cmd,
         path => "/bin:/usr/bin:/usr/local/bin/",
         logoutput => true,        
-        onlyif => "rpm -q ${package_name}-${Dimetis}-1.noarch >/dev/null; test `echo $?` != \"0\"",
+        onlyif => "rpm -q ${dvn2_linkmanager::params::linkmanager_package_name}-${dvn2_linkmanager::params::linkmanager_version}-1.noarch >/dev/null; test `echo $?` != \"0\"",
         before => Exec['Apply Dimetis Patch'], #Make sure patch will always be applied after package is installed
     }
 
