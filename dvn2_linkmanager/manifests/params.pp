@@ -64,5 +64,5 @@ class dvn2_linkmanager::params {
     # Alt 2: Put the base URL as hiera default level data (Important Note: It will has different value in production system, but this module will be resued in production)
     #
     #$linkmanager_package_url = "http://10.208.78.39:5080/content/repositories/${linkmanager_env_repo}/dvn2/dimitis/${linkmanager_package_name}/${linkmanager_version}-1/${linkmanager_package_name}-${linkmanager_version}-1.rpm"
-    $linkmanager_package_url = "http://192.168.119.1/${linkmanager_package_name}-${Dimetis}-1.rpm"
+    $linkmanager_package_url = "http://192.168.119.1/${linkmanager_package_name}-${linkmanager_version}-1.rpm"
 }
