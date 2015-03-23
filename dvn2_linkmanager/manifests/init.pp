@@ -40,7 +40,7 @@ class dvn2_linkmanager {
     $Dimetis = 'p15.05'
     $linkmanager_service_name = 'httpd' #'linkmanager' #TODO: move to parameter file could be better in case it is required by other modules, so we don't hardcode everywhere
     $package_name = 'dimitis-linkmanager'     #TODO: move to parameter file could be better in case it is required by other modules, so we don't hardcode everywhere
-    $package_url = "http://10.208.78.39:5080/content/repositories/dvn2-dev2-releases/dvn2/dimitis/dimitis-linkmanager/${Dimetis}-1/""
+    $package_url = "http://10.208.78.39:5080/content/repositories/dvn2-dev2-releases/dvn2/dimitis/dimitis-linkmanager/${Dimetis}-1/"
     $patch_cmd = '/var/tmp/apply_patch.sh' #'/opt/linkmanager/dest/patches/apply_patch.sh'
     $patch_lock_file = '/var/tmp/runpatch.lock'
 
