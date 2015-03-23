@@ -37,5 +37,53 @@
 #
 class dvn2_linkmanager {
 
+    $Dimetis = p15.05
+    $linkmanager_service_name = 'linkmanager' #TODO: move to parameter file could be better in case it is required by other modules, so we don't hardcode everywhere
+    $package_name = 'dimitis-linkmanager'     #TODO: move to parameter file could be better in case it is required by other modules, so we don't hardcode everywhere
+    $package_url = 'http://10.208.78.39:5080/content/repositories/dvn2-dev2-releases/dvn2/dimitis/dimitis-linkmanager/$Dimetis-1/'
+    $patch_cmd = '/opt/linkmanager/dest/patches/apply_patch.sh'
+    $patch_lock_file = '/var/tmp/runpatch.lock'
 
+
+
+    #
+    # This transition module is to ensure if there is an update for the Linkmanager package, then before apply the changes, stop the linkmanager service first
+    #
+    transition { 'Stop LinkManager Service':
+        resource   => Service[$linkmanager_service_name],
+        attributes => { ensure => stopped },
+        prior_to   => Package['DVN2 Linkmanager'],
+    }
+    
+    #
+    # Ensure the specific verison of linkmanager package is installed.
+    #
+    package { 'DVN2 Linkmanager':,
+        provider => 'rpm',
+        name => $package_name, 
+        ensure => $Dimetis,
+        install_options => [ '—oldpackage’],
+        source => $package_url,
+        notify => Exec['Apply Dimetis Patch'], #If there is an installation happenned, just notify the patch script to apply the patch
+    }
+
+
+    #
+    # This command will be executed if linkmanger package is updated
+    #
+    exec { 'Apply Dimetis Patch':
+        command   => "${cmd}",
+        path      => "/bin:/usr/bin:/usr/local/bin/",
+        logoutput => true,
+        creates   => $patch_lock_file,
+        notify    => [File[$patch_lock_file], Service[$linkmanager_service_name]], #After the patch is applied, create a Lock file, so that the 
+    }
+
+    #
+    # This is a lock file. it will be created once the patch is applied after new package is installed
+    #
+    file { $patch_lock_file : 
+        ensure => file,
+    }
+    
 }
