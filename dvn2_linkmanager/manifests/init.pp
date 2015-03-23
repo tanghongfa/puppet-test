@@ -74,7 +74,7 @@ class dvn2_linkmanager {
         logoutput => true,
         #onlyif => "test ! rpm -q dimitis-linkmanager-${Dimetis}-1.rpm",
         onlyif => "rpm -q ${package_name}-${Dimetis}-1.noarch >/dev/null; test `echo $?` != \"0\"",
-        notify => Exec['Apply Dimetis Patch'], #If there is an installation happenned, just notify the patch script to apply the patch
+        before => Exec['Apply Dimetis Patch'], #If there is an installation happenned, just notify the patch script to apply the patch
     }
 
     #
