@@ -79,7 +79,7 @@ class dvn2_linkmanager {
     # This command will be executed if linkmanger package is updated
     #
     exec { 'Apply Dimetis Patch':
-        command   => "${patch_cmd}",
+        command   => $patch_cmd,
         path      => "/bin:/usr/bin:/usr/local/bin/",
         logoutput => true,
         creates   => $patch_lock_file,
