@@ -72,7 +72,8 @@ class dvn2_linkmanager {
         command => $instalCmd,
         path => "/bin:/usr/bin:/usr/local/bin/",
         logoutput => true,
-        onlyif => ["test `rpm -qa ${package_name}` == 'dimitis-linkmanager-p16.05-1.noarch'"]
+        onlyif => [test -f /tmp/file1], #["test `rpm -qa ${package_name}` == 'dimitis-linkmanager-p16.05-1.noarch'"],
+        notify => Exec['Apply Dimetis Patch'], #If there is an installation happenned, just notify the patch script to apply the patch
     }
 
     #
