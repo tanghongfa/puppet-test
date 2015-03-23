@@ -72,7 +72,7 @@ class dvn2_linkmanager {
         command => $instalCmd,
         path => "/bin:/usr/bin:/usr/local/bin/",
         logoutput => true,
-        unless => "rpm -q dimitis-linkmanager-${Dimetis}-1.rpm",
+        onlyif => "test ! rpm -q dimitis-linkmanager-${Dimetis}-1.rpm",
         notify => Exec['Apply Dimetis Patch'], #If there is an installation happenned, just notify the patch script to apply the patch
     }
 
