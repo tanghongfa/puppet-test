@@ -40,11 +40,9 @@ class dvn2_linkmanager {
     $Dimetis = 'p15.05'
     $linkmanager_service_name = 'linkmanager' #TODO: move to parameter file could be better in case it is required by other modules, so we don't hardcode everywhere
     $package_name = 'dimitis-linkmanager'     #TODO: move to parameter file could be better in case it is required by other modules, so we don't hardcode everywhere
-    $package_url = 'http://10.208.78.39:5080/content/repositories/dvn2-dev2-releases/dvn2/dimitis/dimitis-linkmanager/$Dimetis-1/'
+    $package_url = "http://10.208.78.39:5080/content/repositories/dvn2-dev2-releases/dvn2/dimitis/dimitis-linkmanager/${Dimetis}-1/""
     $patch_cmd = '/opt/linkmanager/dest/patches/apply_patch.sh'
     $patch_lock_file = '/var/tmp/runpatch.lock'
-
-
 
     #
     # This transition module is to ensure if there is an update for the Linkmanager package, then before apply the changes, stop the linkmanager service first
@@ -67,12 +65,11 @@ class dvn2_linkmanager {
         notify => Exec['Apply Dimetis Patch'], #If there is an installation happenned, just notify the patch script to apply the patch
     }
 
-
     #
     # This command will be executed if linkmanger package is updated
     #
     exec { 'Apply Dimetis Patch':
-        command   => "${cmd}",
+        command   => "${patch_cmd}",
         path      => "/bin:/usr/bin:/usr/local/bin/",
         logoutput => true,
         creates   => $patch_lock_file,
@@ -86,6 +83,9 @@ class dvn2_linkmanager {
         ensure => file,
     }
 
+    #
+    # This is to ensure Linkmanager service is always running as it should be.
+    #
     service { $linkmanager_service_name:
         ensure => running,
     }
