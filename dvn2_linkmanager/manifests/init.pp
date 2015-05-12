@@ -41,8 +41,14 @@ class dvn2_linkmanager {
 
     $patch_cmd = '/var/tmp/apply_patch.sh' 
     #patch_cmd = '/opt/linkmanager/dest/patches/apply_patch.sh'
-    $patch_lock_file = '/var/tmp/runpatch.lock'
+    $patch_lock_file = '/var/lock/runpatch.lock'
     $package_install_cmd = "rpm -Uvh --oldpackage ${dvn2_linkmanager::params::linkmanager_package_url}"
+
+
+    file {'/var/lock' :
+      ensure => directory,
+      before => File[$patch_lock_file],
+    }
 
     #
     # This transition module is to ensure Service will be stopped before apply any new/old Linkmanager packages
