@@ -46,7 +46,7 @@ class ccms_silex (
             ensure => $package_version
         }
 
-        service { 'CCMS Silex Serivce'
+        service { 'CCMS Silex Serivce' : 
             name => $service_name,
             ensure => 'running'
         }
