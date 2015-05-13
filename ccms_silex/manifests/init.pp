@@ -47,14 +47,13 @@ class ccms_silex (
         package { 'CCMS Silex RPM Package':
             name => $package_name,
             ensure => $package_version,
-            notify => Serivce['CCMS Silex Serivce']
+            notify => Serivce[$service_name]
         }
 
         #
         # Ensure the Serivce is running
         #
-        service { 'CCMS Silex Serivce' : 
-            name => $service_name,
+        service { $service_name :
             ensure => 'running'
         }
 
