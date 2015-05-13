@@ -10,6 +10,6 @@
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
 
-ccms_silex {
+ccms_silex {'ccms deploy' :
     package_version => '1.1.1'
 }
