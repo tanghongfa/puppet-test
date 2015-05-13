@@ -9,4 +9,7 @@
 # Learn more about module testing here:
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
-include ccms_silex
+
+ccms_silex {
+    package_version => '1.1.1'
+}
