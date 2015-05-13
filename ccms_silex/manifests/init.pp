@@ -47,6 +47,7 @@ class ccms_silex (
         package { 'CCMS Silex RPM Package':
             name   => $package_name,
             ensure => $package_version,
+            notify => Service[$service_name],
         }
 
         #
