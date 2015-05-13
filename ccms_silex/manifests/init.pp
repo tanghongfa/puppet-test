@@ -42,21 +42,15 @@ class ccms_silex (
 ) inherits ::ccms_silex::params
 {
         #
-        # Make sure package with specific version is installed. If not, install it and notify to restart the service
+        # Make sure package with specific version is installed. 
         #
         package { 'CCMS Silex RPM Package':
             name   => $package_name,
             ensure => $package_version,
-            #notify => Serivce[test],
         }
 
-        #service { 'test' :
-        #  ensure => running,
-        #  require => Package['CCMS Silex RPM Package'],
-        #}
-
         #
-        # Ensure the Serivce is running
+        # Ensure the Serivce is running and will be refreshed if a new package is installed
         #
         service { $service_name :
             ensure => running,
