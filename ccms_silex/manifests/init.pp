@@ -45,7 +45,7 @@ class ccms_silex (
         # Make sure package with specific version is installed. If not, install it and notify to restart the service
         #
         package { 'CCMS Silex RPM Package':
-            name => $package_name,
+            name   => $package_name,
             ensure => $package_version,
             notify => Serivce[$service_name],
         }
