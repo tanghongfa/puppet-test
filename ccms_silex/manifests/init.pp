@@ -54,6 +54,6 @@ class ccms_silex (
         # Ensure the Serivce is running
         #
         service { $service_name :
-            ensure => 'running'
+            ensure => 'running',
         }
 }
