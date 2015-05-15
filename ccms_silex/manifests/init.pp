@@ -47,14 +47,18 @@ class ccms_silex (
         package { 'CCMS Silex RPM Package':
             name   => $package_name,
             ensure => $package_version,
-            notify => Service[$service_name],
+            #notify => Service[$service_name],
+            notify => Class['ccms_silex::service'],
         }
 
         #
         # Ensure the Serivce is running and will be refreshed if a new package is installed
         #
-        service { $service_name :
-            ensure => running,
-            require => Package['CCMS Silex RPM Package'],
-        }
+        #service { $service_name :
+        #    ensure => running,
+        #    require => Package['CCMS Silex RPM Package'],
+        #}
+
+        class { '::ccms_silex::service' : }
+
 }
