@@ -42,8 +42,8 @@ class ccms_silex (
 {
 
         class { '::ccms_silex::install' :
-            'package_version' => $package_version,
-            'release_version' => $release_version  
+            package_version => $package_version,
+            release_version => $release_version,
         }
 
         #
