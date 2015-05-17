@@ -10,7 +10,7 @@
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
 
-class {'ccms_silex' :
-    package_version => '2.5-7.el6',
+class {'ccms_drupal' :
+    package_version => '2.5-5.el6',
     package_name => 'javatar',    
 }
