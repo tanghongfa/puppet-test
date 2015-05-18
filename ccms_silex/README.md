@@ -9,9 +9,12 @@ Note: It will NOT taking backup before installation, and it will NOT restart Van
 Adding the following code to Silex Profile.
 (Note: The version should be retrived via hiera data lookup, so it can get the right version based on environment etc.)
 
+
+```
 class {'ccms_silex' :
     package_version => '2.1.1'
 }
+```
 
 
 

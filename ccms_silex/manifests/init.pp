@@ -36,18 +36,14 @@
 # Copyright 2015 Your name here, unless otherwise noted.
 #
 class ccms_silex (
-    $service_name = $::ccms_silex::params::ccms_silex_service_name,
-    $package_name = $::ccms_silex::params::ccms_silex_package_name,
-    $package_version
+    $package_version,
+    $release_version = "1",
 ) inherits ::ccms_silex::params
 {
-        #
-        # Make sure package with specific version is installed. 
-        #
-        package { 'CCMS Silex RPM Package':
-            name   => $package_name,
-            ensure => $package_version,
-            notify => Class['ccms_silex::service'],
+
+        class { '::ccms_silex::install' :
+            'package_version' => $package_version,
+            'release_version' => $release_version  
         }
 
         #
