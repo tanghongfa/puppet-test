@@ -36,12 +36,14 @@
 # Copyright 2015 Your name here, unless otherwise noted.
 #
 class ccms_silex (
+    $package_name = $::ccms_silex::params::ccms_silex_package_name,
     $package_version,
     $release_version = "1",
 ) inherits ::ccms_silex::params
 {
 
         class { '::ccms_silex::install' :
+            package_name    => $package_name,
             package_version => $package_version,
             release_version => $release_version,
         }

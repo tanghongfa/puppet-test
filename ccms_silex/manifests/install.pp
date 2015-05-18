@@ -17,12 +17,12 @@
 #
 #
 class ccms_silex::install (
-    $package_name = $::ccms_silex::params::ccms_silex_package_name,
+    $package_name,
     $package_version,
-    $release_version = "1",
+    $release_version,
 ) {
 
-     #
+        #
         # Make sure package with specific version is installed. 
         #
         package { 'CCMS Silex RPM Package':
@@ -31,8 +31,4 @@ class ccms_silex::install (
             notify => Class['ccms_silex::service'],
         }
 
-        #
-        # Ensure the Serivce is running and will be refreshed if a new package is installed.        
-        #
-        class { '::ccms_silex::service' : }
 }
