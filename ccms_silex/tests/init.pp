@@ -11,6 +11,7 @@
 #
 
 class {'ccms_silex' :
-    package_version => '2.5-7.el6',
+    package_version => '2.5',
+    release_version => '5.el6',
     package_name => 'javatar',    
 }
