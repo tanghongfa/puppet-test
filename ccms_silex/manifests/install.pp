@@ -21,8 +21,6 @@ class ccms_silex::install (
     $package_version,
     $release_version,
 ) {
-        notify {$package_name:}
-        notify {"${package_version}-${release_version}" :}
         #
         # Make sure package with specific version is installed. 
         #
@@ -31,5 +29,4 @@ class ccms_silex::install (
             ensure => "${package_version}-${release_version}",
             notify => Class['ccms_silex::service'],
         }
-
 }
